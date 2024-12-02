@@ -32,8 +32,17 @@ docker-compose up -d
 _________________________db
 
 ```
+docker exec -it inventoryManagement python manage.py runserver 0.0.0.0:8000
+
 docker exec -it inventoryManagement python manage.py makemigrations
 docker exec -it inventoryManagement python manage.py migrate
+
+docker exec -it inventoryManagement python manage.py migrate app zero
+
+docker exec -it inventoryManagement python manage.py migrate properties zero
+
+docker exec -it inventoryManagement python manage.py migrate unapply
+
 ```
 
 ## Create Superuser and Property Owners Group:
@@ -43,3 +52,15 @@ docker exec -it inventoryManagement python manage.py createsuperuser
 docker exec -it inventoryManagement python manage.py create_property_owners_group
 
 ```
+
+
+docker exec -it postgres_container_name bash
+docker exec -it postgres_db bash
+psql -U your_db_user
+\c postgres
+DROP DATABASE your_db_name;
+CREATE DATABASE your_db_name;
+\q
+
+python manage.py migrate
+python manage.py createsuperuser
