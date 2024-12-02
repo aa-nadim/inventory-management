@@ -1,70 +1,168 @@
 # inventory-management
 
-________________For Env_____________________
+A Django-based application for managing and storing property information using Django admin. This project allows for efficient handling of property details, including images, locations, policies and amenities 
 
-____________________________For Linux
+## Table of Contents
+
+1. [Project Overview](#project-overview)
+2. [Features](#features)
+3. [Technologies Used](#technologies-used)
+4. [Prerequisites](#prerequisites)
+5. [Project Structure](#project-structure)
+6. [Getting Started](#getting-started)
+   - [Installation](#installation)
+   - [Database Configuration](#database-configuration)
+   - [Running the Application](#running-the-application)
+7. [Usage](#usage)
+8. [Database Schema](#database-schema)
+
+
+## Project Overview
+
+This Django application is designed to store and manage property information efficiently. It utilizes Django's powerful admin interface for CRUD operations and includes custom models to handle various aspects of property data, such as images, locations, and amenities.
+
+## Features
+
+- **Property Management**: Store and manage detailed property information.
+- **Image Handling**: 
+- **Location Management**: 
+- **Amenity Tracking**: 
+- **Django Admin Interface**: 
+
+## Technologies Used
+
+- Backend: Python, Django
+- Database: PostgreSQL
+- ORM: Django ORM
+
+## Prerequisites
+
+Ensure you have the following installed:
+- Python 3.x
+- PostgreSQL
+- Git
+
+## Getting Started
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/aa-nadim/inventory-management.git
+   cd inventory-management
+   ```
+
+2. Set up a virtual environment:
+   ```bash
+   python3 -m venv .venv 
+   source venv/bin/activate   # On Windows use `source .venv/bin/activate`
+   ```
+
+3. Install the dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### Database Configuration
+
+1. Create a `config.py` file in the DjangoAssignment root directory and add your PostgreSQL credentials:
+
+   ```python
+   # config.py
+   DB_USERNAME = 'your_username'
+   DB_PASSWORD = 'your_password'
+   DB_HOST = 'localhost'
+   DB_PORT = 'port'
+   DJANGO_DBNAME = 'django_project_database_name'
+   SECRET_KEY = 'your SECRET_KEY'
+   ```
+
+2. Create a `.env` file in the DjangoAssignment root directory and add your PostgreSQL credentials:
+
+   ```
+      DB_USERNAME=your_username
+      DB_PASSWORD=your_password
+      DB_HOST=localhost
+      DB_PORT=port
+      DJANGO_DBNAME=django_project_database_name
+      SECRET_KEY=your_SECRET_KEY
+   ```
+
+3. Ensure PostgreSQL is running and create the necessary databases:
+
+```bash
+   psql -U your_username
+   CREATE DATABASE django_project_database_name;
 ```
-      python3 -m venv .venv
-      source .venv/bin/activate
-      deactivate
+
+### Running the Application
+
+```bash
+      docker-compose up --build -d
 ```
-____________________________For Windows
-```
-      python -m venv .venv
-      source .venv/Scripts/activate 
-      deactivate
-```
+1. Apply migrations:
+   ```bash
+   docker exec -it inventoryManagement python manage.py makemigrations
+   docker exec -it inventoryManagement python manage.py migrate
+   ```
 
-__________________________installation
-```
-pip install -r requirements.txt
-```
+2. Create a superuser:
+   ```bash
+   docker exec -it inventoryManagement python manage.py createsuperuser
+   ```
 
-_________________________Docker
-```
-docker volume ls
-docker-compose down -v
-docker volume rm $(docker volume ls -q)
-docker-compose build
-docker-compose up -d
-```
+3. Start the development server:
+   ```bash
+   docker exec -it inventoryManagement python manage.py runserver 0.0.0.0:8000
+   ```
 
-_________________________db
 
-```
-docker exec -it inventoryManagement python manage.py runserver 0.0.0.0:8000
+## Usage
 
-docker exec -it inventoryManagement python manage.py makemigrations
-docker exec -it inventoryManagement python manage.py migrate
+1. `http://localhost:8000`
 
-docker exec -it inventoryManagement python manage.py migrate app zero
+2. `http://localhost:8000/signup/`
 
-docker exec -it inventoryManagement python manage.py migrate properties zero
+3. Access the admin panel at `http://localhost:8000/admin/` and log in with your superuser credentials.
 
-docker exec -it inventoryManagement python manage.py migrate unapply
 
-```
+### Database Schema
 
-## Create Superuser and Property Owners Group:
-```
-docker exec -it inventoryManagement python manage.py createsuperuser
+The project includes the following models:
 
-docker exec -it inventoryManagement python manage.py create_property_owners_group
+### Command-Line Utility for Sitemap Generation
 
+To generate a sitemap.json file for all country locations.
+```bash
+      docker exec -it inventoryManagement python manage.py generate_sitemap
 ```
 
+#### amenities field 
+```
+[
+    "Free Wi-Fi",
+    "Air Conditioning",
+    "Swimming Pool",
+    "Pet-Friendly",
+    "Room Service",
+    "Gym Access"
+]
+```
+#### policy field
+```
+{
+    "pet_policy": {
+        "en": "Pets are not allowed.",
+        "ar": "لا يُسمح بالحيوانات الأليفة."
+    },
+    "smoking_policy": {
+        "en": "Smoking is prohibited indoors.",
+        "ar": "التدخين ممنوع داخل المبنى."
+    }
+}
+```
 
-docker exec -it postgres_container_name bash
-docker exec -it postgres_db bash
-psql -U your_db_user
-\c postgres
-DROP DATABASE your_db_name;
-CREATE DATABASE your_db_name;
-\q
-
-python manage.py migrate
-python manage.py createsuperuser
 
 
 
-docker exec -it inventoryManagement python manage.py generate_sitemap
+

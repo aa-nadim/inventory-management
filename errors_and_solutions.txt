@@ -1,0 +1,137 @@
+________________For Env_____________________
+__________________For Linux
+      python3 -m venv .venv
+      source .venv/bin/activate
+      deactivate
+__________________For Windows
+      python -m venv .venv
+      source .venv/Scripts/activate 
+      deactivate
+--------------------------------------------
+_______________For New Project________________
+
+referance=====>https://docs.djangoproject.com/en/5.1/intro/tutorial01/
+
+check version--->
+
+        python3 -m django --version
+        pip install django
+
+        mkdir inventory
+        django-admin startproject mysite inventory
+        cd inventory
+
+        
+        python manage.py runserver
+        python manage.py startapp app_name
+
+        pip freeze > requirements.txt
+____________________________________________________
+docker volume ls
+docker-compose down -v
+docker volume rm $(docker volume ls -q)
+___________________________________________________
+docker exec -it inventoryManagement python manage.py migrate properties zero
+docker exec -it inventoryManagement python manage.py migrate unapply
+___________________________________________________
+## Create Superuser and Property Owners Group:
+
+docker exec -it inventoryManagement python manage.py createsuperuser
+docker exec -it inventoryManagement python manage.py create_property_owners_group
+___________________________________________________
+
+docker volume ls
+docker volume rm inventory_postgres_data
+
+docker exec -it postgres_db psql -U aa_nadim -d inventory-management-db-demo
+inventory-management-db-demo=# \dx
+_____________________________________________________
+docker exec -it inventoryManagement python manage.py shell
+Verify PostgreSQL Connection===>
+
+docker exec -it <web_container_id> bash
+
+docker exec -it f61586a40be8 bash
+psql -h postgres_db -U aa_nadim -d inventory-management-db-demo
+_______________________________________________________
+
+----------------------------error message-------------------------------
+
+postgres_db  | PostgreSQL Database directory appears to contain a database; Skipping initialization
+postgres_db  |
+postgres_db  | 2024-11-29 15:15:48.981 UTC [1] FATAL:  database files are incompatible with server
+postgres_db  | 2024-11-29 15:15:48.981 UTC [1] DETAIL:  The data directory was initialized by PostgreSQL version 16, which is not compatible with this version 17.2 (Debian 17.2-1.pgdg110+1).
+
+identify----->
+The error message indicates that the PostgreSQL database files are incompatible with the server version. This is because the database was initialized by PostgreSQL version 16, which is not compatible with the current version 17.
+
+solution---->
+To resolve this issue, you can either upgrade the database to the current version or downgrade the server to the version that initialized the database.
+________________________________________________________________________
+
+----------------------------error message-------------------------------
+
+2024-11-30 12:43:57     connection = super().get_new_connection(conn_params)
+2024-11-30 12:43:57                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-11-30 12:43:57   File "/usr/local/lib/python3.11/site-packages/django/utils/asyncio.py", line 26, in inner
+2024-11-30 12:43:57     return func(*args, **kwargs)
+2024-11-30 12:43:57            ^^^^^^^^^^^^^^^^^^^^^
+2024-11-30 12:43:57   File "/usr/local/lib/python3.11/site-packages/django/db/backends/postgresql/base.py", line 332, in get_new_connection
+2024-11-30 12:43:57     connection = self.Database.connect(**conn_params)
+2024-11-30 12:43:57                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-11-30 12:43:57   File "/usr/local/lib/python3.11/site-packages/psycopg2/__init__.py", line 122, in connect
+2024-11-30 12:43:57     conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+2024-11-30 12:43:57            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2024-11-30 12:43:57 django.db.utils.OperationalError: connection to server at "postgres" (172.18.0.2), port 5432 failed: Connection refused
+2024-11-30 12:43:57     Is the server running on that host and accepting TCP/IP connections?
+
+identify----->
+The error message indicates that the connection to the PostgreSQL server at "postgres" (172.18.0.2) on port 5432 was refused. This could be due to the server not being running or not accepting TCP/IP connections.
+ -first you have to complete the installation of the postgresql server
+ -then you have to start the web container
+
+solution----->
+health checks of the postgresql server and the web container
+_______________________________________________________________________________
+
+----------------------------error message-------------------------------
+
+docker exec -it inventoryManagement python manage.py startapp app_name
+
+docker exec -it inventoryManagement rm -rf app_name
+___________________________________________________________________________________
+
+----------------------------error message-------------------------------
+Gracefully stopping... (press Ctrl+C again to force)
+Error response from daemon: failed to mount : mkdir /var/lib/docker/rootfs/overlayfs/255e7fcfad822a8df11e89a57092d47775de290c31e1b2e91df003838e097b56: read-only file system
+
+solution----->
+Check Available Disk Space
+          df -h
+If disk space is low, free up space by deleting unnecessary files or containers/images.
+____________________________________________________________________________________
+
+----------------------------error-------------------------------
+if user is not logged in to the container, then the user will not be able to access the container's files and folders.
+
+solution-----> Drop the database. before drop your database, you have to stop the container. stop the container by using the following command: docker stop container_name. then you can drop the database by using the following command: docker exec - it container_name psql -U postgres -d database_name -c "DROP DATABASE database_name;
+
+docker exec -it postgres_container_name bash
+psql -U your_db_user
+\c postgres
+DROP DATABASE your_db_name;
+CREATE DATABASE your_db_name;
+\q
+python manage.py migrate
+python manage.py createsuperuser
+
+---
+
+docker exec -it postgres_db bash
+psql -U aa_nadim
+\c postgres
+DROP DATABASE inventory-management-db;
+CREATE DATABASE inventory-management-db;
+\q
+python manage.py migrate
+python manage.py createsuperuser
