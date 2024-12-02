@@ -163,6 +163,17 @@ To generate a sitemap.json file for all country locations.
 ```
 
 
+## Testing Instructions
 
+   ```
+   docker exec -it inventoryManagement pip install coverage
+   docker exec -it inventoryManagement python manage.py test
+   docker exec -it inventoryManagement coverage run manage.py test
+   docker exec -it inventoryManagement coverage report
+
+   docker exec -it inventoryManagement coverage html
+   ```
+
+   Open the `htmlcov/index.html` file in a web browser to view the detailed coverage report.
 
 
