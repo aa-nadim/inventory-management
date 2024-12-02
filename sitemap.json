@@ -1,0 +1,13 @@
+[
+    {
+        "Bangladesh": "bangladesh",
+        "locations": [
+            {
+                "CTG state": "bangladesh/ctg-state"
+            },
+            {
+                "CTG city": "bangladesh/ctg-state/ctg-city"
+            }
+        ]
+    }
+]

@@ -64,3 +64,7 @@ CREATE DATABASE your_db_name;
 
 python manage.py migrate
 python manage.py createsuperuser
+
+
+
+docker exec -it inventoryManagement python manage.py generate_sitemap
