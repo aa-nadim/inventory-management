@@ -7,6 +7,8 @@ config.py
 media/accommodations/*
 
 **/__pycache__/
+htmlcov
+.coverage
 
 
 properties/migrations/*

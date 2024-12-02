@@ -135,3 +135,34 @@ CREATE DATABASE inventory-management-db;
 \q
 python manage.py migrate
 python manage.py createsuperuser
+
+
+
+___________________________________________________
+docker exec -it inventoryManagement pip install coverage
+docker exec -it inventoryManagement coverage run manage.py test properties
+
+docker exec -it inventoryManagement coverage html
+docker exec -it inventoryManagement coverage report
+
+
+---------------------------------------------------
+docker exec -it inventoryManagement python manage.py test
+docker exec -it inventoryManagement coverage report
+
+
+
+_____________________________ test_forms.py __________________
+docker exec -it inventoryManagement python manage.py test properties.__test__.test_forms
+
+____________________________ test_views.py ____________________
+docker exec -it inventoryManagement python manage.py test properties.__test__.test_views
+
+_____________________________ test_models.py ____________________
+docker exec -it inventoryManagement python manage.py test properties.__test__.test_models
+
+_____________________________ test_admin.py _____________________
+docker exec -it inventoryManagement python manage.py test properties.__test__.test_admin
+
+__________________________________________________________________
+

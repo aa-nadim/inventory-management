@@ -126,4 +126,4 @@ class LocalizeAccommodation(models.Model):
         verbose_name_plural = "Localized Accommodations"
 
     def __str__(self):
-        return f"{self.accommodation.title} ({self.language})"
+        return f"{self.accommodation.title} - {self.language}"
