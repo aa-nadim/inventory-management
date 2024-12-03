@@ -18,23 +18,32 @@ class Command(BaseCommand):
             country_slug = slugify(country.title)
             locations = []
 
-            # Fetch locations for the country (states, cities)
+            # Fetch locations for the country (states)
             sub_locations = Location.objects.filter(parent=country).order_by('title')
 
             for location in sub_locations:
                 location_slug = slugify(location.title)
-                # Check if it's a state or city, and add its details accordingly
+                location_entry = {
+                    location.title: location_slug
+                }
+                
+                # Check if it's a state and fetch cities under it
                 if location.location_type == 'state':
-                    locations.append({
-                        location.title: f"{country_slug}/{location_slug}"
-                    })
-                    # Fetch cities under the state
+                    # Initialize a list for cities within this state
+                    cities_list = []
                     cities = Location.objects.filter(parent=location).order_by('title')
+                    
                     for city in cities:
                         city_slug = slugify(city.title)
-                        locations.append({
+                        cities_list.append({
                             city.title: f"{country_slug}/{location_slug}/{city_slug}"
                         })
+
+                    # Add cities to the state entry if there are any
+                    if cities_list:
+                        location_entry['locations'] = cities_list
+
+                locations.append(location_entry)
 
             # Append country with its locations (states and cities)
             sitemap_data.append({

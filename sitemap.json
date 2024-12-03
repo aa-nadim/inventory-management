@@ -1,12 +1,14 @@
 [
     {
-        "Bangladesh": "bangladesh",
+        "asdfsd": "asdfsd",
         "locations": [
             {
-                "CTG state": "bangladesh/ctg-state"
-            },
-            {
-                "CTG city": "bangladesh/ctg-state/ctg-city"
+                "asdfgv": "asdfgv",
+                "locations": [
+                    {
+                        "qwereqw": "asdfsd/asdfgv/qwereqw"
+                    }
+                ]
             }
         ]
     }

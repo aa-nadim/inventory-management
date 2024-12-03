@@ -130,7 +130,7 @@ python manage.py createsuperuser
 ---
 
 docker exec -it postgres_db bash
-psql -U aa_nadim
+psql -U aa_nadim inventory-management-db
 \c postgres
 DROP DATABASE inventory-management-db;
 CREATE DATABASE inventory-management-db;
