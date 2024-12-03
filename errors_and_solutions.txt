@@ -153,24 +153,19 @@ docker exec -it inventoryManagement python manage.py test properties/__test__
 docker exec -it inventoryManagement coverage report
 
 
+docker exec -it inventoryManagement pytest properties/tests.py
 
 _____________________________ test_forms.py __________________
 docker exec -it inventoryManagement pip install pytest-cov
 docker exec -it inventoryManagement pytest --cov=properties --cov-report=term-missing
 
+docker exec -it inventoryManagement pytest properties/tests.py
 
-docker exec -it inventoryManagement python manage.py test properties.__test__.test_forms
+pytest properties/tests.py
 
-____________________________ test_views.py ____________________
-docker exec -it inventoryManagement python manage.py test properties.__test__.test_views
+pytest --cov=properties properties/tests.py
 
-_____________________________ test_models.py ____________________
-docker exec -it inventoryManagement python manage.py test properties.__test__.test_models
-
-_____________________________ test_admin.py _____________________
-docker exec -it inventoryManagement python manage.py test properties.__test__.test_admin
-
-
+docker exec -it inventoryManagement pytest --cov=properties --cov-report=html properties/tests.py
 __________________________________________________________________
 [
     {

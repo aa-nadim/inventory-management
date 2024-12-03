@@ -2,7 +2,7 @@
 
 .env
 config.py
-pytest.ini
+
 
 
 media/accommodations/*
