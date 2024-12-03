@@ -20,41 +20,56 @@ class AccommodationImageInline(admin.TabularInline):
 @admin.register(Accommodation)
 class AccommodationAdmin(LeafletGeoAdmin):
     list_display = ('id', 'title', 'country_code', 'bedroom_count', 'review_score', 'usd_rate', 'center', 'location', 'published', 'created_at', 'updated_at')
-    list_filter = ('published', 'location') 
+    list_filter = ('published', 'location')
     search_fields = ('title', 'country_code', 'location__title')
     ordering = ('-created_at',)
-    inlines = [AccommodationImageInline]  # Add the inline for managing images
-    
-    # settings_overrides = {  # Optional: Customize Leaflet map settings
-    #     'DEFAULT_CENTER': (0, 0),  # Latitude and Longitude for default map center
-    #     'DEFAULT_ZOOM': 6,         # Default zoom level
-    # }
+    inlines = [AccommodationImageInline]
+
+    settings_overrides = {
+        'DEFAULT_CENTER': (0, 0),
+        'DEFAULT_ZOOM': 6,
+    }
 
     def get_queryset(self, request):
-        """Limit queryset to show only accommodations created by the logged-in user for Property Owners."""
+        """
+        Limit queryset to show only accommodations created by the logged-in user for Property Owners,
+        but allow superusers to see all accommodations.
+        """
         qs = super().get_queryset(request)
-        if request.user.groups.filter(name='Property Owners').exists():
-            # Show only the accommodations created by the logged-in user
+        if not request.user.is_superuser and request.user.groups.filter(name='Property Owners').exists():
             return qs.filter(user_id=request.user)
-        return qs  # Admins can see all accommodations
+        return qs
 
     def save_model(self, request, obj, form, change):
-        """Automatically assign the logged-in user as the creator if not set."""
+        """
+        Automatically assign the logged-in user as the creator if not set.
+        """
         if not obj.user_id:
             obj.user_id = request.user
         super().save_model(request, obj, form, change)
 
     def has_change_permission(self, request, obj=None):
-        """Allow Property Owner users to edit only their own accommodations."""
+        """
+        Allow Property Owner users to edit only their own accommodations,
+        but allow superusers to edit any accommodation.
+        """
+        if request.user.is_superuser:
+            return True
         if obj and obj.user_id != request.user:
-            return False  # Restrict Property Owners from editing others' records
+            return False
         return super().has_change_permission(request, obj)
 
     def has_delete_permission(self, request, obj=None):
-        """Allow Property Owner users to delete only their own accommodations."""
+        """
+        Allow Property Owner users to delete only their own accommodations,
+        but allow superusers to delete any accommodation.
+        """
+        if request.user.is_superuser:
+            return True
         if obj and obj.user_id != request.user:
-            return False  # Restrict Property Owners from deleting others' records
+            return False
         return super().has_delete_permission(request, obj)
+
 
 @admin.register(AccommodationImage)
 class AccommodationImageAdmin(admin.ModelAdmin):

@@ -3,8 +3,6 @@ from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from .forms import SignUpForm
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import AuthenticationForm
 import logging
 
 def home(request):

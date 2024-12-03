@@ -12,3 +12,6 @@ urllib3
 django-leaflet
 djangorestframework
 django-widget-tweaks
+pytest
+pytest-django
+pytest-cov

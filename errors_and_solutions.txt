@@ -26,6 +26,8 @@ check version--->
         python manage.py startapp app_name
 
         pip freeze > requirements.txt
+
+        pip install -r requirements.txt
 ____________________________________________________
 docker volume ls
 docker-compose down -v
@@ -147,12 +149,16 @@ docker exec -it inventoryManagement coverage report
 
 
 ---------------------------------------------------
-docker exec -it inventoryManagement python manage.py test
+docker exec -it inventoryManagement python manage.py test properties/__test__
 docker exec -it inventoryManagement coverage report
 
 
 
 _____________________________ test_forms.py __________________
+docker exec -it inventoryManagement pip install pytest-cov
+docker exec -it inventoryManagement pytest --cov=properties --cov-report=term-missing
+
+
 docker exec -it inventoryManagement python manage.py test properties.__test__.test_forms
 
 ____________________________ test_views.py ____________________
@@ -164,5 +170,65 @@ docker exec -it inventoryManagement python manage.py test properties.__test__.te
 _____________________________ test_admin.py _____________________
 docker exec -it inventoryManagement python manage.py test properties.__test__.test_admin
 
-__________________________________________________________________
 
+__________________________________________________________________
+[
+    {
+        "Bangladesh": "bangladesh",
+        "locations": [
+            {
+                "dhaka": "bangladesh/dhaka"
+            }
+        ]
+    },
+    {
+        "USA": "usa",
+        "locations": [
+            {
+                "illinois": "usa/illinois"
+            },
+            {
+                "nevada": "usa/nevada",
+                "locations": [
+                    {
+                        "las-vegas": "usa/nevada/las-vegas"
+                    }
+                ]
+            }
+        ]
+    }
+]
+
+
+-----------------------------------------------------
+Stop All Running Containers
+
+docker stop $(docker ps -aq)
+________________________________________________
+Remove All Containers
+docker rm $(docker ps -aq)
+____________________________
+
+Remove All Images
+docker rmi $(docker images -q) --force
+____________________________
+
+
+Remove All Volumes
+docker volume rm $(docker volume ls -q)
+____________________________
+
+Remove All Networks
+docker network rm $(docker network ls -q)
+____________________________
+
+Remove All Docker Data
+docker system prune --all --force
+____________________________
+
+Remove Docker Images
+docker rmi -f $(docker images -a -q)
+____________________________
+
+Clean Up Docker System (Optional)
+docker system prune -a --volumes
