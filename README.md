@@ -2,38 +2,18 @@
 
 A Django-based application for managing and storing property information using Django admin. This project allows for efficient handling of property details, including images, locations, policies and amenities 
 
-## Table of Contents
-
-1. [Project Overview](#project-overview)
-2. [Features](#features)
-3. [Technologies Used](#technologies-used)
-4. [Prerequisites](#prerequisites)
-5. [Project Structure](#project-structure)
-6. [Getting Started](#getting-started)
-   - [Installation](#installation)
-   - [Database Configuration](#database-configuration)
-   - [Running the Application](#running-the-application)
-7. [Usage](#usage)
-8. [Database Schema](#database-schema)
-
-
-## Project Overview
-
-This Django application is designed to store and manage property information efficiently. It utilizes Django's powerful admin interface for CRUD operations and includes custom models to handle various aspects of property data, such as images, locations, and amenities.
-
 ## Features
 
 - **Property Management**: Store and manage detailed property information.
-- **Image Handling**: 
-- **Location Management**: 
-- **Amenity Tracking**: 
-- **Django Admin Interface**: 
+- **Django Admin Interface**: Customized admin panel for easy CRUD operations.
 
 ## Technologies Used
 
 - Backend: Python, Django
 - Database: PostgreSQL
 - ORM: Django ORM
+- Containerization: Docker
+- Web-Based Database Management: pgAdmin
 
 ## Prerequisites
 
@@ -89,51 +69,41 @@ Ensure you have the following installed:
       SECRET_KEY=your_SECRET_KEY
    ```
 
-3. Ensure PostgreSQL is running and create the necessary databases:
-
-   ```bash
-   psql -U your_username
-   CREATE DATABASE django_project_database_name;
-   ```
+3. Ensure PostgreSQL is running 
 
 ### Running the Application
 
-   ```bash
+1. start docker
+   ```bash        
    docker-compose up --build -d
    ```
-1. Apply migrations:
+2. Apply migrations:
    ```bash
    docker exec -it inventoryManagement python manage.py makemigrations
    docker exec -it inventoryManagement python manage.py migrate
    ```
 
-2. Create a superuser:
+3. Create a superuser:
    ```bash
    docker exec -it inventoryManagement python manage.py createsuperuser
    ```
-
-3. Start the development server:
-   ```bash
-   docker exec -it inventoryManagement python manage.py runserver 0.0.0.0:8000
-   ```
-
 
 ## Usage
 
 1. `http://localhost:8000`
 
-2. `http://localhost:8000/signup/`
+2. `http://localhost:8000/signup/`  -- successful signup --> `http://localhost:8000/signup/success/`
 
 3. Access the admin panel at `http://localhost:8000/admin/` and log in with your superuser credentials.
 
+4. To see database in pgadmin goto `http://localhost:5050` and use `your_username`=`admin@admin.com` and `your_password`=`admin123` to login. Then connect to `localhost:5432` with `your_db_username` and `your_db_password` where `host`=`postgres_db`.
 
-### Database Schema
 
-The project includes the following models:
+## Documentation
 
 ### Command-Line Utility for Sitemap Generation
 
-To generate a sitemap.json file for all country locations.
+To generate a `sitemap.json` file for all country locations.
    ```bash
    docker exec -it inventoryManagement python manage.py generate_sitemap
    ```
@@ -162,8 +132,6 @@ To generate a sitemap.json file for all country locations.
       }
    }
    ```
-
-
 ## Testing Instructions
 
    ```bash
@@ -173,13 +141,3 @@ To generate a sitemap.json file for all country locations.
 
    Open the `coverage_report/index.html` file in a web browser to view the detailed coverage report.
 
-
-## Contributing
-
-Fork the project
-   Create your feature branch (git checkout -b feature/NewFeature)
-   Commit your changes (git commit -m 'Add some NewFeature')
-   Push to the branch (git push origin feature/NewFeature)
-   Open a Pull Request
-
-## License
