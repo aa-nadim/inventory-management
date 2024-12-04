@@ -227,3 +227,10 @@ ____________________________
 
 Clean Up Docker System (Optional)
 docker system prune -a --volumes
+
+
+
+
+-----
+id,title,center,parent_id,location_type,country_code,state_abbr,city
+NA_1,North America,POINT(-100.0 45.0),,continent,NA,,3,California,POINT(-119.4179 36.7783),2,state,US,CA,

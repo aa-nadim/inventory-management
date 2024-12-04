@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.gis.db import models as geomodels  # For spatial fields
+from django.contrib.gis.db import models as geomodels
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
