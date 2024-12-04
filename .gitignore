@@ -12,7 +12,7 @@ htmlcov
 .coverage
 
 
-properties/migrations/*
+
 !properties/migrations/__init__.py
 
 

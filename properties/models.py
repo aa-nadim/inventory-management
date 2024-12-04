@@ -77,9 +77,11 @@ class Accommodation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)  # Creation timestamp
     updated_at = models.DateTimeField(auto_now=True)  # Last update timestamp
 
+    # Make id and feed together form the primary key
     class Meta:
-        verbose_name = "Accommodation"
-        verbose_name_plural = "Accommodations"
+        constraints = [
+            models.UniqueConstraint(fields=['id', 'feed'], name='unique_accommodation_id_feed')
+        ]
 
     def __str__(self):
         return f"{self.title} - {self.location.title}"

@@ -5,7 +5,7 @@ from import_export.admin import ImportExportModelAdmin
 from .resources import LocationResource
 
 @admin.register(Location)
-class LocationAdmin(ImportExportModelAdmin):
+class LocationAdmin(ImportExportModelAdmin, LeafletGeoAdmin):
     resource_class = LocationResource
     list_display = ('id', 'title', 'location_type', 'country_code', 'parent', 'created_at')
     search_fields = ('title', 'country_code', 'state_abbr', 'city')
