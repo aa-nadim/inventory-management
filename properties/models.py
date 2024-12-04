@@ -5,6 +5,10 @@ from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 from uuid import uuid4
 import os
+from langdetect import detect, DetectorFactory
+from langdetect.lang_detect_exception import LangDetectException
+# Set seed for consistent results
+DetectorFactory.seed = 0
 
 class Location(models.Model):
     """
@@ -128,3 +132,32 @@ class LocalizeAccommodation(models.Model):
 
     def __str__(self):
         return f"{self.accommodation.title} - {self.language}"
+
+    def detect_description_language(self):
+        """
+        Detect the language of the description field.
+        """
+        try:
+            detected_lang = detect(self.description)
+            return detected_lang
+        except LangDetectException:
+            return "unknown"
+
+    def detect_policy_languages(self):
+        """
+        Detect the language of each policy value.
+        Returns a dictionary with detected languages.
+        """
+        if not self.policy:
+            return {}
+
+        detected_languages = {}
+        for key, value in self.policy.items():
+            try:
+                detected_languages[key] = detect(value)
+            except LangDetectException:
+                detected_languages[key] = "unknown"
+
+        return detected_languages
+
+  
