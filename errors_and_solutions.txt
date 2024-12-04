@@ -396,3 +396,13 @@ class LocalizeAccommodation(models.Model):
 
     def __str__(self):
         return f"{self.property.title} - {self.language}"
+
+
+
+        ++++++++++++++++++++++
+
+        id	1
+accommodation_id	101 (Assuming there is an Accommodation object with ID 101)
+language	en
+description	"Welcome to our beautiful seaside resort. Enjoy the serene environment and excellent services."
+policy	{"check_in": "Check-in time is 2 PM.", "cancellation": "No refunds for cancellations made within 48 hours of arrival.", "breakfast": "Das Frühstück ist kostenlos."}

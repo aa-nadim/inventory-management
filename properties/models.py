@@ -143,21 +143,6 @@ class LocalizeAccommodation(models.Model):
         except LangDetectException:
             return "unknown"
 
-    def detect_policy_languages(self):
-        """
-        Detect the language of each policy value.
-        Returns a dictionary with detected languages.
-        """
-        if not self.policy:
-            return {}
 
-        detected_languages = {}
-        for key, value in self.policy.items():
-            try:
-                detected_languages[key] = detect(value)
-            except LangDetectException:
-                detected_languages[key] = "unknown"
-
-        return detected_languages
 
   
