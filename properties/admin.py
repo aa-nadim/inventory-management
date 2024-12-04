@@ -61,6 +61,19 @@ class AccommodationAdmin(LeafletGeoAdmin):
         if obj and obj.user_id != request.user:
             return False
         return super().has_change_permission(request, obj)
+    
+    def get_form(self, request, obj=None, **kwargs):
+        """
+        Limit the user field dropdown to only show the current user or allow superusers to select any user.
+        """
+        form = super().get_form(request, obj, **kwargs)
+
+        # If the user is not a superuser, set the user field to the current user and disable the dropdown
+        if not request.user.is_superuser:
+            form.base_fields['user'].initial = request.user  # Pre-set the user to the current logged-in user
+            form.base_fields['user'].disabled = True  # Disable the dropdown to prevent changes
+
+        return form
 
     def has_delete_permission(self, request, obj=None):
         """
