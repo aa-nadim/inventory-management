@@ -40,6 +40,7 @@ This Django application is designed to store and manage property information eff
 Ensure you have the following installed:
 - Python 3.x
 - PostgreSQL
+- Docker
 - Git
 
 ## Getting Started
@@ -90,16 +91,16 @@ Ensure you have the following installed:
 
 3. Ensure PostgreSQL is running and create the necessary databases:
 
-```bash
+   ```bash
    psql -U your_username
    CREATE DATABASE django_project_database_name;
-```
+   ```
 
 ### Running the Application
 
-```bash
-      docker-compose up --build -d
-```
+   ```bash
+   docker-compose up --build -d
+   ```
 1. Apply migrations:
    ```bash
    docker exec -it inventoryManagement python manage.py makemigrations
@@ -133,47 +134,52 @@ The project includes the following models:
 ### Command-Line Utility for Sitemap Generation
 
 To generate a sitemap.json file for all country locations.
-```bash
-      docker exec -it inventoryManagement python manage.py generate_sitemap
-```
+   ```bash
+   docker exec -it inventoryManagement python manage.py generate_sitemap
+   ```
 
 #### amenities field 
-```
-[
-    "Free Wi-Fi",
-    "Air Conditioning",
-    "Swimming Pool",
-    "Pet-Friendly",
-    "Room Service",
-    "Gym Access"
-]
-```
+   ```
+   [
+      "Free Wi-Fi",
+      "Air Conditioning",
+      "Swimming Pool",
+      "Pet-Friendly",
+      "Room Service",
+      "Gym Access"
+   ]
+   ```
 #### policy field
-```
-{
-    "pet_policy": {
-        "en": "Pets are not allowed.",
-        "ar": "لا يُسمح بالحيوانات الأليفة."
-    },
-    "smoking_policy": {
-        "en": "Smoking is prohibited indoors.",
-        "ar": "التدخين ممنوع داخل المبنى."
-    }
-}
-```
+   ```
+   {
+      "pet_policy": {
+         "en": "Pets are not allowed.",
+         "ar": "لا يُسمح بالحيوانات الأليفة."
+      },
+      "smoking_policy": {
+         "en": "Smoking is prohibited indoors.",
+         "ar": "التدخين ممنوع داخل المبنى."
+      }
+   }
+   ```
 
 
 ## Testing Instructions
 
-   ```
-   docker exec -it inventoryManagement pip install coverage
-   docker exec -it inventoryManagement python manage.py test
-   docker exec -it inventoryManagement coverage run manage.py test
-   docker exec -it inventoryManagement coverage report
-
-   docker exec -it inventoryManagement coverage html
+   ```bash
+   docker exec -it inventoryManagement pytest --cov=properties --cov-report=term-missing
+   docker exec -it inventoryManagement pytest --cov=properties --cov-report=html:coverage_report
    ```
 
-   Open the `htmlcov/index.html` file in a web browser to view the detailed coverage report.
+   Open the `coverage_report/index.html` file in a web browser to view the detailed coverage report.
 
 
+## Contributing
+
+Fork the project
+   Create your feature branch (git checkout -b feature/NewFeature)
+   Commit your changes (git commit -m 'Add some NewFeature')
+   Push to the branch (git push origin feature/NewFeature)
+   Open a Pull Request
+
+## License
