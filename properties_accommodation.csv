@@ -1,0 +1,11 @@
+"id","feed","title","country_code","bedroom_count","review_score","usd_rate","center","amenities","user_id","location_id","published","created_at","updated_at"
+admin_acco_1,555,Admin Accommodation,"00",3,0.2,0.03,POINT (-73.99292 40.747049),"[\"WiFi\", \"Parking\"]",1,loc_1,true,2024-12-05 00:18:09,2024-12-05 00:18:09
+acco_2,1556,Central Park Suite,"US",2,4.5,0.05,POINT (-73.968285 40.785091),"[\"WiFi\", \"Air Conditioning\", \"Kitchen\"]",2,loc_7,true,2024-12-05 00:18:09,2024-12-05 00:18:09
+acco_3,2557,Los Angeles Beach House,"US",4,4.8,0.07,POINT (-118.2437 34.0522),"[\"Pool\", \"WiFi\", \"Ocean View\"]",3,loc_5,true,2024-12-05 00:18:09,2024-12-05 00:18:09
+acco_4,3558,San Francisco Apartment,"US",1,3.9,0.06,POINT (-122.4194 37.7749),"[\"Gym\", \"WiFi\"]",4,loc_6,false,2024-12-05 00:18:09,2024-12-05 00:18:09
+acco_5,5559,Charming Paris Loft,"FR",2,4.7,0.08,POINT (2.3522 48.8566),"[\"WiFi\", \"Balcony\", \"City View\"]",5,loc_10,true,2024-12-05 00:18:09,2024-12-05 00:18:09
+acco_6,1560,Rural French Cottage,"FR",3,4.2,0.04,POINT (2.2137 46.2276),"[\"Garden\", \"Fireplace\"]",6,loc_9,true,2024-12-05 00:18:09,2024-12-05 00:18:09
+acco_7,2561,New York Studio,"US",1,3.5,0.05,POINT (-74.0060 40.7128),"[\"WiFi\", \"Kitchen\"]",7,loc_4,true,2024-12-05 00:18:09,2024-12-05 00:18:09
+acco_8,6562,Brooklyn Penthouse,"US",3,4.6,0.09,POINT (-73.9442 40.6782),"[\"Rooftop\", \"WiFi\", \"Pet Friendly\"]",8,loc_8,false,2024-12-05 00:18:09,2024-12-05 00:18:09
+acco_9,8563,California Ranch,"US",5,4.9,0.1,POINT (-119.4179 36.7783),"[\"Pool\", \"WiFi\", \"Farm View\"]",9,loc_3,true,2024-12-05 00:18:09,2024-12-05 00:18:09
+acco_10,9564,Mountain Cabin Retreat,"US",4,4.3,0.07,POINT (-119.8194 37.7749),"[\"Fireplace\", \"Mountain View\"]",10,loc_3,false,2024-12-05 00:18:09,2024-12-05 00:18:09

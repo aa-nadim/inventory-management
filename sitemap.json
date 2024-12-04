@@ -1,12 +1,34 @@
 [
     {
-        "asdfsd": "asdfsd",
+        "France": "france",
         "locations": [
             {
-                "asdfgv": "asdfgv",
+                "Paris": "paris"
+            }
+        ]
+    },
+    {
+        "USA": "usa",
+        "locations": [
+            {
+                "California": "california",
                 "locations": [
                     {
-                        "qwereqw": "asdfsd/asdfgv/qwereqw"
+                        "Los Angeles": "usa/california/los-angeles"
+                    },
+                    {
+                        "San Francisco": "usa/california/san-francisco"
+                    }
+                ]
+            },
+            {
+                "New York": "new-york",
+                "locations": [
+                    {
+                        "Brooklyn": "usa/new-york/brooklyn"
+                    },
+                    {
+                        "Manhattan": "usa/new-york/manhattan"
                     }
                 ]
             }

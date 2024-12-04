@@ -44,13 +44,13 @@ class Migration(migrations.Migration):
                 PARTITION OF properties_accommodation
                 FOR VALUES FROM (0) TO (1000);
 
-            CREATE TABLE properties_accommodation_feed_1001_5000 
+            CREATE TABLE properties_accommodation_feed_1000_5000 
                 PARTITION OF properties_accommodation
-                FOR VALUES FROM (1001) TO (5000);
+                FOR VALUES FROM (1000) TO (5000);
 
-            CREATE TABLE properties_accommodation_feed_5001_10000 
+            CREATE TABLE properties_accommodation_feed_5000_10000 
                 PARTITION OF properties_accommodation
-                FOR VALUES FROM (5001) TO (10000);
+                FOR VALUES FROM (5000) TO (10000);
 
             -- Optional: Add a default partition for feeds outside specified ranges
             CREATE TABLE properties_accommodation_feed_default 
