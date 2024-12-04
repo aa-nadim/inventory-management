@@ -61,12 +61,12 @@ Ensure you have the following installed:
 2. Create a `.env` file in the DjangoAssignment root directory and add your PostgreSQL credentials:
 
    ```
-      DB_USERNAME=your_username
-      DB_PASSWORD=your_password
-      DB_HOST=localhost
-      DB_PORT=port
-      DJANGO_DBNAME=django_project_database_name
-      SECRET_KEY=your_SECRET_KEY
+   DB_USERNAME=your_username
+   DB_PASSWORD=your_password
+   DB_HOST=localhost
+   DB_PORT=port
+   DJANGO_DBNAME=django_project_database_name
+   SECRET_KEY=your_SECRET_KEY
    ```
 
 3. Ensure PostgreSQL is running 
