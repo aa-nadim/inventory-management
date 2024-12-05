@@ -112,7 +112,7 @@ To generate a `sitemap.json` file for all country locations.
    docker exec -it inventoryManagement python manage.py generate_sitemap
    ```
 
-#### amenities field 
+#### Add accommodation Amenities field 
    ```
    [
       "Free Wi-Fi",
@@ -123,7 +123,7 @@ To generate a `sitemap.json` file for all country locations.
       "Gym Access"
    ]
    ```
-#### policy field
+#### Add Localized Accommodation Aolicy field
    ```
    {
       "pet_policy": {
