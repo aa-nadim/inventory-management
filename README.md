@@ -46,7 +46,7 @@ Ensure you have the following installed:
 
 ### Database Configuration
 
-1. Create a `config.py` file in the DjangoAssignment root directory and add your PostgreSQL credentials:
+1. Create a `config.py` file in the inventory-management root directory and add your PostgreSQL credentials:
 
    ```python
    # config.py
@@ -58,7 +58,7 @@ Ensure you have the following installed:
    SECRET_KEY = 'your SECRET_KEY'
    ```
 
-2. Create a `.env` file in the DjangoAssignment root directory and add your PostgreSQL credentials:
+2. Create a `.env` file in the inventory-management root directory and add your PostgreSQL credentials:
 
    ```
    DB_USERNAME=your_username
@@ -92,11 +92,15 @@ Ensure you have the following installed:
 
 1. `http://localhost:8000`
 
-2. `http://localhost:8000/signup/`  -- successful signup --> `http://localhost:8000/signup/success/`
+2. `http://localhost:8000/signup/`  -- successful signup --> `http://localhost:8000/signup/success/`. If the admin permite the `Active` and `Staff status` of the user then the user can login into the admin pannel.
 
-3. Access the admin panel at `http://localhost:8000/admin/` and log in with your superuser credentials.
+3. when a user sings up, he/she will automaticaly `Property Owners` group will be assigned to the user.
 
-4. To see database in pgadmin goto `http://localhost:5050` and use `your_username`=`admin@admin.com` and `your_password`=`admin123` to login. Then connect to `localhost:5432` with `your_db_username` and `your_db_password` where `host`=`postgres_db`.
+4. Initially `Property Owners` has no permmission for any activities. Admin has to assign the permission to the `Property Owners` group.
+
+5. Access the admin panel at `http://localhost:8000/admin/` and log in with your superuser credentials.
+
+6. To see database in pgadmin goto `http://localhost:5050` and use `your_username`=`admin@admin.com` and `your_password`=`admin123` to login. Then connect to `localhost:5432` with `your_db_username` and `your_db_password` where `host`=`postgres_db`.
 
 
 ## Documentation
